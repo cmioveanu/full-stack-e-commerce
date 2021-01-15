@@ -16,7 +16,9 @@ app.use(require('cookie-parser')());
 const expressSession = require('express-session');
 app.use(expressSession({secret: 'mySecretKey'}));
 
+
 const passport = require('passport');
+require('./config/passport');
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,8 +33,6 @@ app.use(session({secret: 'keyboard cat'}))
 
 var request = require('request');
 
-const { v4: uuidv4 } = require('uuid');
-
 
 
 
@@ -44,16 +44,13 @@ const { v4: uuidv4 } = require('uuid');
 
 //****  Routes  ****/
 //*****************/
-const loginRouter = require('./routes/login');
+
+const authRouter = require('./routes/auth');
+const accountRouter = require('./routes/account');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
-const joinRouter = require('./routes/join');
-const accountRouter = require('./routes/account');
-const logoutRouter = require('./routes/logout');
 
-app.use('/join', joinRouter);
-app.use('/login', loginRouter);
-app.use('/logout', logoutRouter);
+app.use('/auth', authRouter);
 app.use('/account', accountRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);

@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <form action="/join" method="post">
+      <form action="/auth/join" method="post">
 
         <label>Username:</label>
         <input type="text" name="username" />
@@ -28,7 +28,7 @@ function App() {
 
 
 
-      <form action="/login" method="post">
+      <form action="/auth/login" method="post">
         <div>
           <label>Username:</label>
           <input type="text" name="username" />

@@ -1,16 +1,16 @@
 const express = require('express');
-const join = express.Router();
-module.exports = join;
+const auth = express.Router();
+module.exports = auth;
 
 const dbConfig = require('../config/db');
 const { Pool } = require('pg');
 const pool = new Pool(dbConfig);
 
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 
 
-join.post('/', async function (req, res) {
-
+auth.post('/join', async function (req, res) {
     try {
         const client = await pool.connect();
         await client.query('BEGIN');
@@ -40,4 +40,30 @@ join.post('/', async function (req, res) {
         client.release();
     }
     catch (e) { throw (e) }
+});
+
+
+
+auth.post('/login', passport.authenticate('local', {
+    successRedirect: '/account',
+    failureRedirect: '/login',
+    failureFlash: true
+}), function (req, res) {
+    if (req.body.remember) {
+        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
+    } else {
+        req.session.cookie.expires = false; // Cookie expires at end of session
+    }
+    res.redirect('/');
+});
+
+
+
+auth.get('/logout', function (req, res) {
+
+    console.log(req.isAuthenticated());
+    req.logout();
+    console.log(req.isAuthenticated());
+    req.flash('success', "Logged out.See you soon!");
+    res.redirect('/');
 });
