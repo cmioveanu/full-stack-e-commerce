@@ -1,47 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
+import { Header } from './components/Header';
+import { Banner } from './components/Banner';
+import { Bestsellers } from './components/Bestsellers';
+import { Footer } from './components/Footer';
+
 function App() {
   return (
-    <div className="App">
-      <form action="/auth/join" method="post">
+    <Router>
+      <div className="App">
 
-        <label>Username:</label>
-        <input type="text" name="username" />
-
-        <label>Password:</label>
-        <input type="password" name="password" />
-
-        <label>Name:</label>
-        <input type="text" name="name" />
-
-        <label>Email:</label>
-        <input type="email" name="email" />
-
-        <label>Phone:</label>
-        <input type="phone" name="phone" />
-
-        <div>
-          <input type="submit" value="Join" />
-        </div>
-      </form>
+        <Header />
+        <Banner />
+        <Bestsellers />
+        <Footer />
 
 
-
-      <form action="/auth/login" method="post">
-        <div>
-          <label>Username:</label>
-          <input type="text" name="username" />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" />
-        </div>
-        <div>
-          <input type="submit" value="Log In" />
-        </div>
-      </form>
-    </div>
+      </div>
+    </Router>
   );
 }
 
