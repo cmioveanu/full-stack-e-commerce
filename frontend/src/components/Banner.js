@@ -5,13 +5,16 @@ export const Banner = (props) => {
     return (
         <section className={styles.bannerContainer}>
             <div className={styles.bannerLeftWatch}>
-                <div>
-                    <h2></h2>
-                    <h3></h3>
+                <div className={styles.names}>
+                    <h3>Wooden Watch</h3>
+                    <h2>The Geneva</h2>
                 </div>
             </div>
             <div className={styles.bannerRightWatch}>
-                <button>Shop Now</button>
+                <div className={styles.names}>
+                    <h3>Wooden Sunglasses</h3>
+                    <h2>The Scandinavia</h2>
+                </div>
             </div>
         </section>
     );

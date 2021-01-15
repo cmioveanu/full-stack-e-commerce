@@ -8,6 +8,7 @@
     background-image: url(../_images/watch1.jpg);
     background-position: center;
     background-size: cover;
+    position: relative;
 }
 
 .bannerRightWatch {
@@ -19,8 +20,26 @@
     position: relative;
 }
 
-.bannerContainer button {
+.names {
     position: absolute;
-    right: 2em;
+    left: 2em;
     bottom: 2em;
+    color: white;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.names h3{
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.names h2 {
+    margin: 0;
+    font-family: 'Times New Roman', Times, serif;
+    text-transform: capitalize;
+    font-weight: normal;
+    font-size: 3em;
 }
