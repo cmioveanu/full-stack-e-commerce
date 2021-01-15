@@ -1,0 +1,42 @@
+header {
+ padding: 0 2.5%;
+}
+
+.mainNav {
+    display: flex;
+    justify-content: space-between;
+}
+.mainNav ul {
+    list-style-type: none;
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
+.mainNav ul li {
+    display: inline-block;
+    margin-left: 1em;
+}
+
+.mainNav ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: black;
+    font-size: 0.7em;
+    font-weight: 500;
+    padding-bottom: 10px;
+}
+
+.mainNav ul li a:hover {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.mainNav ul li a span {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.logo {
+    margin-right: 3em;
+}

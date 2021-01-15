@@ -1,20 +1,21 @@
 import React from 'react';
+import styles from './Footer.module.css';
 
-export const Fotter = () => {
+export const Footer = () => {
     return (
         <footer>
             <p>Description goes here.</p>
             <ul>
-                <li><a href=""></a>about</li>
-                <li><a href=""></a>Shop</li>
-                <li><a href=""></a>Sunglasses</li>
-                <li><a href=""></a>Watches</li>
+                <li><a href="">about</a></li>
+                <li><a href="">Shop</a></li>
+                <li><a href="">Sunglasses</a></li>
+                <li><a href="">Watches</a></li>
             </ul>
 
             <ul>
-                <li><a href=""></a>Login</li>
-                <li><a href=""></a>Sign Up</li>
-                <li><a href=""></a>Account</li>
+                <li><a href="">Login</a></li>
+                <li><a href="">Sign Up</a></li>
+                <li><a href="">Account</a></li>
             </ul>
         </footer>
     );

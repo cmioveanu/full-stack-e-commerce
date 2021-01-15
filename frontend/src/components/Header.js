@@ -1,14 +1,14 @@
 import React from 'react';
+import styles from './Header.module.css';
 
 export const Header = () => {
     return (
         <header>
-            <nav>
+            <nav className={styles.mainNav}>
                 <ul>
-                    <li><a href="">Shop all</a></li>
-                    <li><a href="">Watches</a></li>
-                    <li><a href="">Sunglasses</a></li>
+                    <li><a href="" className={styles.logo}><span>The Wooden Shop</span></a></li>
                     <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
                 </ul>
 
                 <ul>
