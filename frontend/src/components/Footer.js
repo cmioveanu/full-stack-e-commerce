@@ -3,20 +3,10 @@ import styles from './Footer.module.css';
 
 export const Footer = () => {
     return (
-        <footer>
-            <p>Description goes here.</p>
-            <ul>
-                <li><a href="">about</a></li>
-                <li><a href="">Shop</a></li>
-                <li><a href="">Sunglasses</a></li>
-                <li><a href="">Watches</a></li>
-            </ul>
-
-            <ul>
-                <li><a href="">Login</a></li>
-                <li><a href="">Sign Up</a></li>
-                <li><a href="">Account</a></li>
-            </ul>
+        <footer className={styles.footer}>
+            <p>Here at <span>The Wooden Shop</span> we simply love wood for its traditional and stylish appearance,
+                so we try our best to offer you the highest quality watches and sunglasses.</p>
+            <small>&#169; 2021 - The Wooden Shop</small>
         </footer>
     );
 };
