@@ -9,7 +9,8 @@ import {
 } from "react-router-dom";
 
 import { Header } from './components/Header';
-import { Banner } from './components/Banner';
+import { BannerWatches } from './components/BannerWatches';
+import { BannerSunglasses } from './components/BannerSunglasses';
 import { Bestsellers } from './components/Bestsellers';
 import { Footer } from './components/Footer';
 
@@ -19,8 +20,9 @@ function App() {
       <div className="App">
 
         <Header />
-        <Banner />
+        <BannerWatches />
         <Bestsellers />
+        <BannerSunglasses />
         <Footer />
 
 
