@@ -2,71 +2,61 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+
+/****  Dependencies  ****/
+/***********************/
 const cors = require('cors');
 app.use(cors());
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(require('cookie-parser')());
+const expressSession = require('express-session');
+app.use(expressSession({secret: 'mySecretKey'}));
+
+const passport = require('passport');
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+//app.use(‘/public’, express.static(__dirname + ‘/public’));
+const flash = require('connect-flash');
+app.use(flash());
+
+const session = require('express-session');
+app.use(session({secret: 'keyboard cat'}))
+
+
+var request = require('request');
+
+const { v4: uuidv4 } = require('uuid');
+
+
+
+
+
+
+
+
+
+
+//****  Routes  ****/
+//*****************/
 const loginRouter = require('./routes/login');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
+const joinRouter = require('./routes/join');
+const accountRouter = require('./routes/account');
+const logoutRouter = require('./routes/logout');
 
+app.use('/join', joinRouter);
 app.use('/login', loginRouter);
+app.use('/logout', logoutRouter);
+app.use('/account', accountRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
-
-
-const dbConfig = require('./config/db');
-const { Pool } = require('pg');
-const pool = new Pool(dbConfig);
-
-const users = pool.query('SELECT * FROM Customers', (error, results) => {
-    if (error) {
-        throw error;
-    }
-    console.log(results.rows);
-    return results.rows;
-})
-
-
-var passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
-
-
-    app.use(passport.initialize());
-    app.use(passport.session());
-
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-        users.findOne({ username: username }, function (err, user) {
-            if (err) {
-                console.log("There was an error!");
-                return done(err);
-            }
-            if (!user) {
-                return done(null, false, { message: 'Incorrect username.' });
-            }
-            if (!user.validPassword(password)) {
-                return done(null, false, { message: 'Incorrect password.' });
-            }
-            return done(null, user);
-        });
-    }
-));
-
-
-
-
-app.post('/login',
-    passport.authenticate('local', {
-        successRedirect: '/orders',
-        failureRedirect: '/login',
-        failureFlash: true
-    })
-);
-
-
 
 
 
