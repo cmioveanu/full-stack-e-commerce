@@ -46,3 +46,23 @@
 body {
   font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
+
+
+
+
+
+/****** Form Styles ******/
+
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  color: black;
+  background-color: white;
+  border: 1px solid darkgray;
+  padding: 1.4em;
+  text-transform: capitalize;
+  font-size: 0.7em;
+  margin: 0.7em 0;
+}

@@ -27,6 +27,8 @@ export const Bestsellers = (props) => {
                     <div class={styles.product} key={product.id}>
                         <img src={product.img_thumb_path} alt="" />
                         <h2>{product.name}</h2>
+                        <p>£{product.unit_price}</p>
+                        <button>Add to cart</button>
                     </div>
                 ))
             }

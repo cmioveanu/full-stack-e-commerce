@@ -17,7 +17,7 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, usern
     const client = await pool.connect()
     try {
       await client.query('BEGIN')
-      var currentAccountsData = await JSON.stringify(client.query('SELECT id, name, email, password FROM customers WHERE username=$1', [username], function (err, result) {
+      var currentAccountsData = await JSON.stringify(client.query('SELECT id, first_name, last_name, email, password FROM customers WHERE username=$1', [username], function (err, result) {
 
         if (err) {
           return done(err)

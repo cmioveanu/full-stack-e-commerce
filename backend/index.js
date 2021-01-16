@@ -45,12 +45,10 @@ var request = require('request');
 //****  Routes  ****/
 //*****************/
 
-const authRouter = require('./routes/auth');
 const accountRouter = require('./routes/account');
 const productsRouter = require('./routes/products');
 const ordersRouter = require('./routes/orders');
 
-app.use('/auth', authRouter);
 app.use('/account', accountRouter);
 app.use('/products', productsRouter);
 app.use('/orders', ordersRouter);
