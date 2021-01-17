@@ -17,30 +17,32 @@ orders.get('/', async (req, res) => {
             SELECT orders_products.order_id,
                    orders_products.product_id,
                    orders_products.quantity,
+                   orders.created_at,
+                   orders.status,
                    products.name,
-                   products.unit_price
+                   products.unit_price,
+                   products.img_thumb_path
             FROM orders_products
+            JOIN orders ON orders_products.order_id = orders.id
             JOIN products ON orders_products.product_id = products.id
             WHERE orders_products.order_id = ${i}`);
 
-        if (result.rows.length > 0) { ordersList.push(result.rows); }
+        const total = await pool.query(`
+        SELECT DISTINCT order_id, SUM(quantity * unit_price)
+        FROM orders_products
+        JOIN products 
+        ON orders_products.product_id = products.id
+        GROUP BY 1
+        HAVING orders_products.order_id = ${i}
+        ORDER BY 1 DESC`);
+
+        if (result.rows.length > 0) {
+            result.rows[0].totalOrderAmount = total.rows[0].sum;
+            ordersList.push(result.rows);
+        }
     }
 
     res.send(ordersList);
-});
-
-
-
-orders.get('/', (req, res) => {
-    pool.query(`SELECT * FROM orders, products, customers, orders_products
-                WHERE orders.id = orders_products.order_id 
-                AND products.id = orders_products.product_id
-                AND customers.id = orders.customer_id;`, (error, results) => {
-        if (error) {
-            throw error;
-        }
-        res.status(200).send(results.rows);
-    })
 });
 
 

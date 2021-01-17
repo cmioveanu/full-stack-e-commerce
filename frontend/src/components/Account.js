@@ -11,7 +11,6 @@ export const Account = () => {
         const orders = await fetch('http://localhost:8080/orders');
         const jsonOrders = await orders.json();
         setOrders(jsonOrders);
-        console.log(jsonOrders);
     }
 
 
@@ -21,17 +20,36 @@ export const Account = () => {
 
     return (
         <section className={styles.account}>
-            {
-                orders.map(order => (
-                    <div key={order.created_at} class={styles.individualOrder}>
-                        <h2>Order Number: {order.order_id} </h2>
-                        <h3>By {order.first_name} {order.last_name}</h3>
-                        <p>Date: {order.created_at}</p>
-                        <p>No. of Products: {orders.quantity}</p>
-                       
-                    </div>
-                ))
-            }
+
+            <section className={styles.ordersContainer}>
+                <h2>Welcome back, Cristian! Your previous orders:</h2>
+                <div className={styles.ordersHistory}>
+                {
+                    orders.map(order => (
+                        <div key={order[0].id} className={styles.individualOrder}>
+                            <div className={styles.orderDetails}>
+                                <p>{(order[0].created_at)}</p>
+                                <p>Order # {order[0].order_id} </p>
+                                <p>Order total: £{order[0].totalOrderAmount}</p>
+                            </div>
+                            {
+                                order.map(product => (
+                                    <div className={styles.productDetails} >
+                                        <img src={product.img_thumb_path} />
+                                        <div>
+                                            <p className={styles.productName}>{product.name}</p>
+                                            <p>£{product.unit_price}</p>
+                                            <p>Qty: {product.quantity}</p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+                        </div>
+                    ))
+                }
+                </div>
+            </section>
         </section>
     );
 }
