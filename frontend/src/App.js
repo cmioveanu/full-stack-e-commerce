@@ -14,6 +14,7 @@ import { BannerSunglasses } from './components/BannerSunglasses';
 import { Bestsellers } from './components/Bestsellers';
 import { Footer } from './components/Footer';
 import { Login } from './components/Login';
+import { Account } from './components/Account';
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/account">
+            <Account />
           </Route>
         </Switch>
 
