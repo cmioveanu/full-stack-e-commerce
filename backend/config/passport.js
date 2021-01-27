@@ -35,7 +35,7 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, usern
             }
             else if (check) {
               console.log("User authenticated successfully...");
-              return done(null, [{ email: result.rows[0].email, firstName: result.rows[0].firstName }]);
+              return done(null, [{ id: result.rows[0].id, email: result.rows[0].email, firstName: result.rows[0].firstName }]);
             }
             else {
               console.log("Incorrect login details...");
@@ -53,7 +53,12 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, usern
 }
 ))
 passport.serializeUser(function (user, done) {
-  done(null, user);
-}); passport.deserializeUser(function (user, done) {
+  console.log("serialize user is executing");
   done(null, user);
 });
+
+passport.deserializeUser(function (user, done) {
+  done(null, user);
+});
+
+

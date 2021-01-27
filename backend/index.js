@@ -12,23 +12,27 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(require('cookie-parser')());
+app.use(require('cookie-parser')('mySecretKey'));
 const expressSession = require('express-session');
-app.use(expressSession({secret: 'mySecretKey'}));
+app.use(expressSession({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
+}));
 
 
 const passport = require('passport');
-require('./config/passport');
+
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport');
 
 
 //app.use(‘/public’, express.static(__dirname + ‘/public’));
 const flash = require('connect-flash');
 app.use(flash());
 
-const session = require('express-session');
-app.use(session({secret: 'keyboard cat'}))
+
 
 
 var request = require('request');

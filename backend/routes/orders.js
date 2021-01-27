@@ -6,9 +6,22 @@ const dbConfig = require('../config/db');
 const { Pool } = require('pg');
 const pool = new Pool(dbConfig);
 
+const passport = require('passport');
+require('passport-local');
+
+//const {ensureAuthenticated, forwardAuthenticated} = require('../config/passport');
+
+const helloWorld = (req, res, next) => next();
+
+const ensureAuthenticated = (req, res, next) => {
+    console.log(req.isAuthenticated());
+    console.log(req.user);
+
+}
 
 
-orders.get('/', async (req, res) => {
+
+orders.get('/', ensureAuthenticated, async (req, res) => {
     const ordersList = [];
     const ids = await pool.query(`SELECT id FROM orders ORDER BY id DESC`);
 
