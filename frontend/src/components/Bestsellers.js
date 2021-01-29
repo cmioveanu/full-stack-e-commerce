@@ -30,7 +30,10 @@ export const Bestsellers = (props) => {
                         <img src={product.img_thumb_path} alt="" />
                         <h2>{product.name}</h2>
                         <p>£{product.unit_price}</p>
-                        <button onClick={() => props.addToCart(product)}>Add to cart</button>
+                        <button onClick={() => {
+                            props.addToCart(product);
+                            props.addToTotal(product.unit_price);
+                        }}>Add to cart</button>
                     </div>
                 ))
             }

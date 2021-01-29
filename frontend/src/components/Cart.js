@@ -4,8 +4,9 @@ import { useState } from 'react';
 import styles from './Cart.module.css';
 
 export const Cart = (props) => {
+    
 
-    console.log(props.cart);
+    
 
     return (
         <section className={styles.cart}>
@@ -18,11 +19,25 @@ export const Cart = (props) => {
                         <div className={styles.productInfo}>
                             <p>{product.name} <br /></p>
                             <p>{product.quantity} x £{product.unit_price}</p>
-                            <button onClick={() => props.removeFromCart(product)}>-</button> {product.quantity} <button onClick={() => props.addToCart(product)}>+</button>
+
+                            <button onClick={() => {
+                                props.removeFromTotal(product.unit_price);
+                                props.removeFromCart(product);
+                            }}>-</button> {product.quantity} <button onClick={() => {
+                                props.addToTotal(product.unit_price);
+                                props.addToCart(product);
+                            }}>+</button>
+                            <br />
+                            <button onClick={() => props.removeAllFromCart(product)}>Remove</button>
+
                         </div>
                     </div>
                 ))
             }
+            <div>
+                <p>FREE SHIPPING ON ALL U.S. ORDERS</p>
+                <p>SUBTOTAL: £{props.total.toFixed(2)}</p>
+            </div>
         </section>
     );
 }

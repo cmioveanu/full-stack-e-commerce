@@ -19,7 +19,9 @@ import { Cart } from './components/Cart';
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
 
+  //cart methods
   const addToCart = (product) => {
     const productIndex = cart.indexOf(product);
     if (productIndex == -1) {
@@ -38,10 +40,8 @@ function App() {
     }
   }
 
-
-
   const removeFromCart = (product) => {
-    if(product.quantity === 1) {
+    if (product.quantity === 1) {
       setCart(cart => cart.filter(item => item.id !== product.id));
     }
     else {
@@ -52,12 +52,31 @@ function App() {
     }
   }
 
+  const removeAllFromCart = (product) => {
+    const amountToRemove = product.quantity * product.unit_price;
+    total - amountToRemove <= 0 ? setTotal(0) : setTotal(oldTotal => oldTotal - amountToRemove);
+
+    setCart(cart => cart.filter(item => item.id !== product.id));
+  }
+
   const showCart = () => {
     const cartContainer = document.querySelector('.cart');
     cartContainer.style.className == 'isShown'
       ? cartContainer.style.className = 'isHidden'
       : cartContainer.style.className = 'isSHown';
   }
+
+  const addToTotal = (amount) => {
+    console.log("adding to total..");
+    setTotal(old => old + parseFloat(amount));
+  }
+
+  const removeFromTotal = (amount) => {
+    console.log("removing from total..");
+    total - amount <= 0 ? setTotal(0) : setTotal(oldTotal => oldTotal - parseFloat(amount));
+  }
+
+  
 
   return (
     <Router>
@@ -67,12 +86,18 @@ function App() {
           showCart={showCart}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
+          addToTotal={addToTotal}
+          removeFromTotal={removeFromTotal}
+          total={total}
+          removeAllFromCart={removeAllFromCart}
         />
 
         <Switch>
           <Route exact path="/">
             <BannerWatches />
-            <Bestsellers addToCart={addToCart} />
+            <Bestsellers addToCart={addToCart}
+              addToTotal={addToTotal}
+            />
             <BannerSunglasses />
           </Route>
           <Route path="/login">
