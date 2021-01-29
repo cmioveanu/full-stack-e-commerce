@@ -11,15 +11,6 @@ const bcrypt = require('bcrypt');
 
 
 
-account.get('/', function (req, res, next) {
-    if (req.isAuthenticated()) {
-        res.send();
-    }
-    else {
-        res.redirect('/login');
-    }
-});
-
 
 account.post('/join', async function (req, res) {
     try {
@@ -58,23 +49,24 @@ account.post('/join', async function (req, res) {
 account.post('/login', passport.authenticate('local', {
     successRedirect: '/account',
     failureRedirect: '/login',
-    failureFlash: true
-}), function (req, res) {
-    if (req.body.remember) {
-        req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
-    } else {
-        req.session.cookie.expires = false; // Cookie expires at end of session
-    }
-    res.redirect('../');
-});
+}),
+    function (req, res) {
+        if (req.body.remember) {
+            req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // Cookie expires after 30 days
+        } else {
+            req.session.cookie.expires = false; // Cookie expires at end of session
+        }
+        res.redirect('../');
+    });
 
 
 
 account.get('/logout', function (req, res) {
-
-    console.log(req.isAuthenticated());
-    req.logout();
-    console.log(req.isAuthenticated());
+    /*req.logout();
+    console.log("logged out!");
     req.flash('success', "Logged out.See you soon!");
-    res.redirect('/');
+    res.redirect('/');*/
+    req.session.destroy(function (err) {
+        res.redirect('../'); //Inside a callback… bulletproof!
+      });
 });

@@ -11,13 +11,15 @@ export const Bestsellers = (props) => {
         const products = await fetch('http://localhost:8080/products');
         const jsonProducts = await products.json();
         setBestsellers(jsonProducts);
-        console.log(bestsellers);
     }
 
 
     useEffect(() => {
         productsList();
+        console.log(bestsellers);
     }, [])
+
+
 
 
     return (
@@ -28,7 +30,7 @@ export const Bestsellers = (props) => {
                         <img src={product.img_thumb_path} alt="" />
                         <h2>{product.name}</h2>
                         <p>£{product.unit_price}</p>
-                        <button>Add to cart</button>
+                        <button onClick={() => props.addToCart(product)}>Add to cart</button>
                     </div>
                 ))
             }

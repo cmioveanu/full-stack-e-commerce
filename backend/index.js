@@ -12,30 +12,52 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(require('cookie-parser')('mySecretKey'));
-const expressSession = require('express-session');
-app.use(expressSession({
-    secret: 'mySecretKey',
-    resave: true,
-    saveUninitialized: true
-}));
 
+
+
+
+
+
+
+
+const session = require('express-session');
+app.use(session({secret: 'mySecretKey'}));
+
+app.use(require('cookie-parser')());
 
 const passport = require('passport');
-
 app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport');
 
 
-//app.use(‘/public’, express.static(__dirname + ‘/public’));
-const flash = require('connect-flash');
-app.use(flash());
+app.use(function(req, res, next){
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header('Access-Control-Allow-Credentials', "true");
+    next();
+});
 
 
 
 
-var request = require('request');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

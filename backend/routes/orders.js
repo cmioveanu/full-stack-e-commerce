@@ -7,21 +7,19 @@ const { Pool } = require('pg');
 const pool = new Pool(dbConfig);
 
 const passport = require('passport');
-require('passport-local');
 
-//const {ensureAuthenticated, forwardAuthenticated} = require('../config/passport');
-
-const helloWorld = (req, res, next) => next();
-
-const ensureAuthenticated = (req, res, next) => {
+function checkAuthentication(req,res,next){
     console.log(req.isAuthenticated());
-    console.log(req.user);
-
+    if(req.isAuthenticated()){
+        //req.isAuthenticated() will return true if user is logged in
+        
+        next();
+    } else{
+        res.redirect("/login");
+    }
 }
 
-
-
-orders.get('/', ensureAuthenticated, async (req, res) => {
+orders.get('/', checkAuthentication, async (req, res) => {
     const ordersList = [];
     const ids = await pool.query(`SELECT id FROM orders ORDER BY id DESC`);
 
@@ -54,7 +52,6 @@ orders.get('/', ensureAuthenticated, async (req, res) => {
             ordersList.push(result.rows);
         }
     }
-
     res.send(ordersList);
 });
 

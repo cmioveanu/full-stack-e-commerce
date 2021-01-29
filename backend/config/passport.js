@@ -7,12 +7,11 @@ const { Pool } = require('pg');
 const pool = new Pool(dbConfig);
 
 
-
+/*
 passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
 
   loginAttempt();
   async function loginAttempt() {
-
 
     const client = await pool.connect()
     try {
@@ -51,14 +50,57 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, usern
   };
 
 }
-))
+)) */
+
+
+
+passport.use('local', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
+
+  const client = await pool.connect();
+
+
+
+  await client.query('SELECT id, first_name, last_name, email, password FROM customers WHERE username=$1', [username], function (err, user) {
+
+
+
+    //if username not found:
+    if (user.rows[0] == null) {
+      console.log("Oops. Incorrect login details...");
+      return done(null, false);
+    }
+
+
+
+    //if username found, check password:
+    else {
+      bcrypt.compare(password, user.rows[0].password, function (err, check) {
+        if (check) {
+          console.log("User authenticated successfully...");
+          return done(null, user);
+          //{ id: result.rows[0].id, email: result.rows[0].email, firstName: result.rows[0].firstName }
+        }
+        else {
+          console.log("Incorrect login details...");
+          return done(null, false);
+        }
+      });
+    }
+
+
+
+  })
+
+}));
+
+
 passport.serializeUser(function (user, done) {
   console.log("serialize user is executing");
   done(null, user);
 });
 
+
 passport.deserializeUser(function (user, done) {
+  console.log("de-serialize user is executing");
   done(null, user);
 });
-
-
