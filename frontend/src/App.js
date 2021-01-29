@@ -29,7 +29,7 @@ function App() {
     }
     else {
       const newCart = [...cart];
-      
+
       const newProduct = newCart[productIndex];
       newProduct.quantity++;
 
@@ -41,7 +41,15 @@ function App() {
 
 
   const removeFromCart = (product) => {
-    setCart(cart => cart.filter(item => item.id === product.id));
+    if(product.quantity === 1) {
+      setCart(cart => cart.filter(item => item.id !== product.id));
+    }
+    else {
+      const newCart = [...cart];
+      const productIndex = newCart.indexOf(product);
+      newCart[productIndex].quantity--;
+      setCart(newCart);
+    }
   }
 
   const showCart = () => {
