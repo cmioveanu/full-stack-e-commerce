@@ -23,7 +23,7 @@ header {
     margin-left: 1em;
 }
 
-.mainNav ul li a {
+.mainNav ul li a, span {
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -36,6 +36,12 @@ header {
 .mainNav ul li a:hover {
     padding-bottom: 5px;
     border-bottom: 1px solid black;
+}
+
+.cart:hover {
+    padding-bottom: 5px;
+    border-bottom: 1px solid black;
+    cursor: pointer;
 }
 
 .mainNav ul li a span {

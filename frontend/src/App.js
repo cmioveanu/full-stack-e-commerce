@@ -93,7 +93,8 @@ function App() {
     <Router>
       <div className="App">
         <Header removeFromCart={removeFromCart}
-            showHideCart={showHideCart}/>
+            showHideCart={showHideCart}
+            cart={cart}/>
         <Cart cart={cart}
           showCart={showCart}
           addToCart={addToCart}
