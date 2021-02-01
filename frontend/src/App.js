@@ -19,6 +19,7 @@ import { Cart } from './components/Cart';
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [itemsInCart, setItemsInCart] = useState(0);
   const [total, setTotal] = useState(0);
 
   //cart methods
@@ -27,7 +28,6 @@ function App() {
     if (productIndex == -1) {
       product.quantity = 1;
       setCart([...cart, product]);
-      return;
     }
     else {
       const newCart = [...cart];
@@ -38,6 +38,7 @@ function App() {
       newCart.slice(productIndex)
       setCart(newCart);
     }
+    setItemsInCart(itemsInCart + 1);
   }
 
   const removeFromCart = (product) => {
@@ -50,6 +51,7 @@ function App() {
       newCart[productIndex].quantity--;
       setCart(newCart);
     }
+    setItemsInCart(itemsInCart - 1);
   }
 
   const removeAllFromCart = (product) => {
@@ -57,6 +59,7 @@ function App() {
     total - amountToRemove <= 0 ? setTotal(0) : setTotal(oldTotal => oldTotal - amountToRemove);
 
     setCart(cart => cart.filter(item => item.id !== product.id));
+    setItemsInCart(itemsInCart - product.quantity);
   }
 
   const showCart = () => {
@@ -78,7 +81,7 @@ function App() {
 
   const showHideCart = () => {
     const cart = document.querySelector('#cart');
-    if(cart.style.minWidth !== '300px') {
+    if (cart.style.minWidth !== '300px') {
       cart.style.minWidth = '300px';
       cart.style.padding = '3rem';
     } else {
@@ -87,16 +90,19 @@ function App() {
     }
   }
 
-  
+
+
+
 
   return (
     <Router>
       <div className="App">
-        <Header removeFromCart={removeFromCart}
-            showHideCart={showHideCart}
-            cart={cart}/>
+        <Header showHideCart={showHideCart}
+          cart={cart}
+          itemsInCart={itemsInCart} />
         <Cart cart={cart}
           showCart={showCart}
+          itemsInCart={itemsInCart}
           addToCart={addToCart}
           removeFromCart={removeFromCart}
           addToTotal={addToTotal}

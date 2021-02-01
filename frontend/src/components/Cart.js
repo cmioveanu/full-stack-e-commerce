@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useState } from 'react';
 
 import styles from './Cart.module.css';
 
 export const Cart = (props) => {
     
-
+    
     
 
     return (
         <section className={styles.cart} id="cart">
-            <p>{props.cart.length} item(s) added to your cart</p>
+            <p>{props.itemsInCart} item(s) added to your cart</p>
             <div className={styles.productsContainer}>
             {
                 props.cart.map(product => (
