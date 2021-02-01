@@ -20,46 +20,44 @@ export const Account = (props) => {
 
     }
 
-
     useEffect(() => {
         ordersList();
     }, [])
 
     const loggedInOrOut = props.name ? `Welcome back, ${props.name}! Your previous orders:` : `Please log in first!`;
 
+    const renderOrders = !props.name ? null : orders.map(order => (
+            <div key={order[0].id} className={styles.individualOrder}>
+                <div className={styles.orderDetails}>
+                    <p>{(order[0].created_at)}</p>
+                    <p>Order # {order[0].order_id} </p>
+                    <p>Order total: £{order[0].totalOrderAmount}</p>
+                </div>
+                {
+                    order.map(product => (
+                        <div className={styles.productDetails} >
+                            <img src={product.img_thumb_path} />
+                            <div>
+                                <p className={styles.productName}>{product.name}</p>
+                                <p>£{product.unit_price}</p>
+                                <p>Qty: {product.quantity}</p>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        ))
+    
+
 
     return (
         <section className={styles.account}>
-
-            <section className={styles.ordersContainer}>
+            <div className={styles.ordersContainer}>
                 <h2>{loggedInOrOut}</h2>
                 <div className={styles.ordersHistory}>
-                    {
-                        orders.map(order => (
-                            <div key={order[0].id} className={styles.individualOrder}>
-                                <div className={styles.orderDetails}>
-                                    <p>{(order[0].created_at)}</p>
-                                    <p>Order # {order[0].order_id} </p>
-                                    <p>Order total: £{order[0].totalOrderAmount}</p>
-                                </div>
-                                {
-                                    order.map(product => (
-                                        <div className={styles.productDetails} >
-                                            <img src={product.img_thumb_path} />
-                                            <div>
-                                                <p className={styles.productName}>{product.name}</p>
-                                                <p>£{product.unit_price}</p>
-                                                <p>Qty: {product.quantity}</p>
-                                            </div>
-                                        </div>
-                                    ))
-                                }
-
-                            </div>
-                        ))
-                    }
+                    {renderOrders}
                 </div>
-            </section>
+            </div>
         </section>
     );
 }
