@@ -76,12 +76,24 @@ function App() {
     total - amount <= 0 ? setTotal(0) : setTotal(oldTotal => oldTotal - parseFloat(amount));
   }
 
+  const showHideCart = () => {
+    const cart = document.querySelector('#cart');
+    if(cart.style.minWidth !== '300px') {
+      cart.style.minWidth = '300px';
+      cart.style.padding = '3rem';
+    } else {
+      cart.style.minWidth = '0';
+      cart.style.padding = '0';
+    }
+  }
+
   
 
   return (
     <Router>
       <div className="App">
-        <Header removeFromCart={removeFromCart} />
+        <Header removeFromCart={removeFromCart}
+            showHideCart={showHideCart}/>
         <Cart cart={cart}
           showCart={showCart}
           addToCart={addToCart}

@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 
 import { Link } from "react-router-dom";
 
-export const Header = () => {
+export const Header = (props) => {
     return (
         <header>
             <nav className={styles.mainNav}>
@@ -16,7 +16,7 @@ export const Header = () => {
                 <ul>
                     <li><Link to="/login">Log In</Link></li>
                     <li><Link to="/account">Account</Link></li>
-                    <li><Link to="/cart">Cart</Link></li>
+                    <li onClick={props.showHideCart}>Cart</li>
                 </ul>
             </nav>
         </header>
