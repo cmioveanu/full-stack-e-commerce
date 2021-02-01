@@ -17,7 +17,6 @@ account.post('/join', async function (req, res) {
         const client = await pool.connect();
         await client.query('BEGIN');
         var pwd = await bcrypt.hash(req.body.password, 5);
-        console.log(req.body);
 
         await JSON.stringify(client.query('SELECT id FROM customers WHERE email=$1', [req.body.email], function (err, result) {
             if (result.rows[0]) {
@@ -62,11 +61,8 @@ account.post('/login', passport.authenticate('local', {
 
 
 account.get('/logout', function (req, res) {
-    /*req.logout();
+    req.logout();
+    res.redirect('../');
     console.log("logged out!");
-    req.flash('success', "Logged out.See you soon!");
-    res.redirect('/');*/
-    req.session.destroy(function (err) {
-        res.redirect('../'); //Inside a callback… bulletproof!
-      });
-});
+
+}); 

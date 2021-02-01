@@ -4,16 +4,20 @@ import { useState, useEffect } from 'react';
 
 
 
-export const Account = () => {
+export const Account = (props) => {
     const [orders, setOrders] = useState([]);
 
     const ordersList = async () => {
         const orders = await fetch('http://localhost:8080/orders', {
             credentials: 'include'
-          });
+        });
 
         const jsonOrders = await orders.json();
+        await props.setName(jsonOrders[0][0].firstName + " " + jsonOrders[0][0].lastName);
+        console.log("name is: " + props.name);
+
         setOrders(jsonOrders);
+
     }
 
 
@@ -21,11 +25,14 @@ export const Account = () => {
         ordersList();
     }, [])
 
+    const loggedInOrOut = props.name ? `Welcome back, ${props.name}! Your previous orders:` : `Please log in first!`;
+
+
     return (
         <section className={styles.account}>
 
             <section className={styles.ordersContainer}>
-                <h2>Welcome back, Cristian! Your previous orders:</h2>
+                <h2>{loggedInOrOut}</h2>
                 <div className={styles.ordersHistory}>
                     {
                         orders.map(order => (

@@ -4,6 +4,19 @@ import styles from './Header.module.css';
 import { Link } from "react-router-dom";
 
 export const Header = (props) => {
+
+    const logMeOut = async () => {
+        await fetch('http://localhost:8080/account/logout', {
+            credentials: 'include'
+        });
+        props.setName("");
+    }
+
+    const loginLogout = props.name ? <li onClick={logMeOut}><Link>Log Out</Link></li>
+        : <li><Link to="/login">Log In</Link></li>;
+
+
+
     return (
         <header>
             <nav className={styles.mainNav}>
@@ -14,7 +27,7 @@ export const Header = (props) => {
                 </ul>
 
                 <ul>
-                    <li><Link to="/login">Log In</Link></li>
+                    {loginLogout}
                     <li><Link to="/account">Account</Link></li>
                     <li onClick={props.showHideCart}><span class={styles.cart}>Cart: {props.itemsInCart}</span></li>
                 </ul>

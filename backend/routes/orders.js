@@ -8,22 +8,25 @@ const pool = new Pool(dbConfig);
 
 const passport = require('passport');
 
-function checkAuthentication(req,res,next){
+function checkAuthentication(req, res, next) {
     console.log(req.isAuthenticated());
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         //req.isAuthenticated() will return true if user is logged in
-        
         next();
-    } else{
+    } else {
         res.redirect("/login");
     }
 }
 
+
 orders.get('/', checkAuthentication, async (req, res) => {
     const ordersList = [];
-    const ids = await pool.query(`SELECT id FROM orders ORDER BY id DESC`);
+    const ids = await pool.query(`SELECT id FROM orders WHERE orders.customer_id = $1 ORDER BY id DESC`, [req.user.id]);
 
-    for (let i = ids.rows[0].id; i > 0; i--) {
+    const idNumbers = ids.rows.map(id => id.id);
+    console.log(idNumbers);
+
+    for (let i = 0; i < idNumbers.length; i++) {
         const result = await pool.query(`
             SELECT orders_products.order_id,
                    orders_products.product_id,
@@ -36,7 +39,7 @@ orders.get('/', checkAuthentication, async (req, res) => {
             FROM orders_products
             JOIN orders ON orders_products.order_id = orders.id
             JOIN products ON orders_products.product_id = products.id
-            WHERE orders_products.order_id = ${i}`);
+            WHERE orders_products.order_id = ${idNumbers[i]}`);
 
         const total = await pool.query(`
         SELECT DISTINCT order_id, SUM(quantity * unit_price)
@@ -44,16 +47,23 @@ orders.get('/', checkAuthentication, async (req, res) => {
         JOIN products 
         ON orders_products.product_id = products.id
         GROUP BY 1
-        HAVING orders_products.order_id = ${i}
+        HAVING orders_products.order_id = ${idNumbers[i]}
         ORDER BY 1 DESC`);
 
         if (result.rows.length > 0) {
             result.rows[0].totalOrderAmount = total.rows[0].sum;
+            result.rows[0].firstName = req.user.firstName;
+            result.rows[0].lastName = req.user.lastName;
             ordersList.push(result.rows);
         }
     }
     res.send(ordersList);
 });
+
+
+
+
+
 
 
 

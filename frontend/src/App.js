@@ -18,6 +18,10 @@ import { Account } from './components/Account';
 import { Cart } from './components/Cart';
 
 function App() {
+
+  const [name, setName] = useState("");
+
+
   const [cart, setCart] = useState([]);
   const [itemsInCart, setItemsInCart] = useState(0);
   const [total, setTotal] = useState(0);
@@ -99,7 +103,9 @@ function App() {
       <div className="App">
         <Header showHideCart={showHideCart}
           cart={cart}
-          itemsInCart={itemsInCart} />
+          itemsInCart={itemsInCart}
+          name={name}
+          setName={setName} />
         <Cart cart={cart}
           showCart={showCart}
           itemsInCart={itemsInCart}
@@ -123,7 +129,9 @@ function App() {
             <Login />
           </Route>
           <Route path="/account">
-            <Account />
+            <Account 
+            name={name}
+            setName={setName}/>
           </Route>
         </Switch>
 

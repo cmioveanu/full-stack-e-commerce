@@ -54,6 +54,7 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, (req, usern
 
 
 
+
 passport.use('local', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
 
   const client = await pool.connect();
@@ -77,8 +78,12 @@ passport.use('local', new LocalStrategy({ passReqToCallback: true }, async (req,
       bcrypt.compare(password, user.rows[0].password, function (err, check) {
         if (check) {
           console.log("User authenticated successfully...");
-          return done(null, user);
-          //{ id: result.rows[0].id, email: result.rows[0].email, firstName: result.rows[0].firstName }
+          return done(null, {
+            id: user.rows[0].id,
+            email: user.rows[0].email,
+            firstName: user.rows[0].first_name,
+            lastName: user.rows[0].last_name
+          });
         }
         else {
           console.log("Incorrect login details...");
@@ -104,3 +109,4 @@ passport.deserializeUser(function (user, done) {
   console.log("de-serialize user is executing");
   done(null, user);
 });
+

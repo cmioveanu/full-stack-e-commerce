@@ -17,9 +17,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 
 
-
-
-
 const session = require('express-session');
 app.use(session({secret: 'mySecretKey'}));
 
@@ -38,6 +35,7 @@ app.use(function(req, res, next){
     res.header('Access-Control-Allow-Credentials', "true");
     next();
 });
+
 
 
 
