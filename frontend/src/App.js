@@ -118,23 +118,42 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <Banner leftBanner={`bannerLeftWatch`}
-                    rightBanner={`bannerRightWatch`}
+            <Banner leftBanner={{
+              class: 'bannerLeftWatch',
+              category: 'Wooden Watch',
+              name: 'The Geneva'
+            }}
+              rightBanner={{
+                class: 'bannerRightWatch',
+                category: 'Wooden Watch',
+                name: 'The Scandinavia'
+              }}
             />
+
             <Bestsellers addToCart={addToCart}
               addToTotal={addToTotal}
             />
-            <Banner leftBanner={`bannerLeftSunglasses`}
-                    rightBanner={`bannerRightSunglasses`}
+
+            <Banner leftBanner={{
+              class: 'bannerLeftSunglasses',
+              category: 'Wooden Sunglasses',
+              name: 'The Utah'
+            }}
+              rightBanner={{
+                class: 'bannerRightSunglasses',
+                category: 'Wooden Sunglasses',
+                name: 'The Idaho'
+              }}
             />
           </Route>
+          
           <Route path="/login">
             <Login />
           </Route>
           <Route path="/account">
-            <Account 
-            name={name}
-            setName={setName}/>
+            <Account
+              name={name}
+              setName={setName} />
           </Route>
         </Switch>
 

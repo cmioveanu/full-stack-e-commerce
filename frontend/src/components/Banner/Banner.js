@@ -9,16 +9,16 @@ export const Banner = (props) => {
 
     return (
         <section className={styles.bannerContainer}>
-            <div className={`${styles.banner} ${styles[props.leftBanner]}`}>
+            <div className={`${styles.banner} ${styles[props.leftBanner.class]}`}>
                 <div className={styles.names}>
-                    <h3>Wooden Sunglasses</h3>
-                    <h2>The Utah</h2>
+                    <h3>{props.leftBanner.category}</h3>
+                    <h2>{props.leftBanner.name}</h2>
                 </div>
             </div>
-            <div className={`${styles.banner} ${styles[props.rightBanner]}`}>
+            <div className={`${styles.banner} ${styles[props.rightBanner.class]}`}>
                 <div className={styles.names}>
-                    <h3>Wooden Sunglasses</h3>
-                    <h2>The Idaho</h2>
+                    <h3>{props.rightBanner.category}</h3>
+                    <h2>{props.rightBanner.name}</h2>
                 </div>
             </div>
         </section>
