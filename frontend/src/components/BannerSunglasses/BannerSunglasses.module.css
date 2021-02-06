@@ -5,7 +5,7 @@
 .bannerLeftWatch {
     min-height: 700px;
     width: 50%;
-    background-image: url(../_images/sunglasses1.jpg);
+    background-image: url(../../_images/sunglasses1.jpg);
     background-position: right;
     background-size: cover;
     position: relative;
@@ -14,7 +14,7 @@
 .bannerRightWatch {
     min-height: 700px;
     width: 50%;
-    background-image: url(../_images/sunglasses2.jpg);
+    background-image: url(../../_images/sunglasses2.jpg);
     background-position: center;
     background-size: cover;
     position: relative;

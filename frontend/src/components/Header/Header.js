@@ -29,7 +29,7 @@ export const Header = (props) => {
                 <ul>
                     {loginLogout}
                     <li><Link to="/account">Account</Link></li>
-                    <li onClick={props.showHideCart}><span class={styles.cart}>Cart: {props.itemsInCart}</span></li>
+                    <li onClick={props.showHideCart}><span className={styles.cart}>Cart: {props.itemsInCart}</span></li>
                 </ul>
             </nav>
         </header>

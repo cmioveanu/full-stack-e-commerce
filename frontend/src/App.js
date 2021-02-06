@@ -8,14 +8,14 @@ import {
   Link
 } from "react-router-dom";
 
-import { Header } from './components/Header';
-import { BannerWatches } from './components/BannerWatches';
-import { BannerSunglasses } from './components/BannerSunglasses';
-import { Bestsellers } from './components/Bestsellers';
-import { Footer } from './components/Footer';
-import { Login } from './components/Login';
-import { Account } from './components/Account';
-import { Cart } from './components/Cart';
+import { Header } from './components/Header/Header';
+import { BannerWatches } from './components/BannerWatches/BannerWatches';
+import { BannerSunglasses } from './components/BannerSunglasses/BannerSunglasses';
+import { Bestsellers } from './components/Bestsellers/Bestsellers';
+import { Footer } from './components/Footer/Footer';
+import { Login } from './components/Login/Login';
+import { Account } from './components/Account/Account';
+import { Cart } from './components/Cart/Cart';
 
 function App() {
 

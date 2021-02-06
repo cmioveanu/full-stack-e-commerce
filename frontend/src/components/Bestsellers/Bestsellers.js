@@ -27,7 +27,7 @@ export const Bestsellers = (props) => {
             {
                 bestsellers.map(product => (
                     <div class={styles.product} key={product.id}>
-                        <img src={product.img_thumb_path} alt="" />
+                        <img src={"/_images/" + product.img_thumb_path} alt="" />
                         <h2>{product.name}</h2>
                         <p>£{product.unit_price}</p>
                         <button onClick={() => {

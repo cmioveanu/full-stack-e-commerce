@@ -15,7 +15,7 @@ export const Cart = (props) => {
             {
                 props.cart.map(product => (
                     <div key={product.id} className={styles.product}>
-                        <div><img src={product.img_thumb_path}></img></div>
+                        <div><img src={"/_images/" + product.img_thumb_path}></img></div>
 
                         <div className={styles.productInfo}>
                             <p className={styles.productName}>{product.name} <br /></p>
