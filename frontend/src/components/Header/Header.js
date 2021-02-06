@@ -12,7 +12,7 @@ export const Header = (props) => {
         props.setName("");
     }
 
-    const loginLogout = props.name ? <li onClick={logMeOut}><Link>Log Out</Link></li>
+    const loginLogout = props.name ? <li onClick={logMeOut}><Link to="">Log Out</Link></li>
         : <li><Link to="/login">Log In</Link></li>;
 
 

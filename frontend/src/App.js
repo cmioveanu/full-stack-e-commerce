@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 
 import { Header } from './components/Header/Header';
-import { BannerWatches } from './components/BannerWatches/BannerWatches';
-import { BannerSunglasses } from './components/BannerSunglasses/BannerSunglasses';
+import { Banner } from './components/Banner/Banner';
 import { Bestsellers } from './components/Bestsellers/Bestsellers';
 import { Footer } from './components/Footer/Footer';
 import { Login } from './components/Login/Login';
@@ -119,11 +118,15 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            <BannerWatches />
+            <Banner leftBanner={`bannerLeftWatch`}
+                    rightBanner={`bannerRightWatch`}
+            />
             <Bestsellers addToCart={addToCart}
               addToTotal={addToTotal}
             />
-            <BannerSunglasses />
+            <Banner leftBanner={`bannerLeftSunglasses`}
+                    rightBanner={`bannerRightSunglasses`}
+            />
           </Route>
           <Route path="/login">
             <Login />
