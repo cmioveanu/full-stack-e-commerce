@@ -12,6 +12,6 @@ products.get('/', (req, res) => {
         if (error) {
             throw error;
         }
-        res.status(200).send(results.rows);
+        res.status(200).json(results.rows);
     })
 });

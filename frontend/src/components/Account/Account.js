@@ -36,7 +36,7 @@ export const Account = (props) => {
                 {
                     order.map(product => (
                         <div className={styles.productDetails} >
-                            <img src={product.img_thumb_path} />
+                            <img src={"/_images/" + product.img_thumb_path} />
                             <div>
                                 <p className={styles.productName}>{product.name}</p>
                                 <p>£{product.unit_price}</p>

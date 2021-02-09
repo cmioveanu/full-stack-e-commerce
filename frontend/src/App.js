@@ -132,6 +132,7 @@ function App() {
 
             <Bestsellers addToCart={addToCart}
               addToTotal={addToTotal}
+              productsListUrl="http://localhost:8080/products"
             />
 
             <Banner leftBanner={{

@@ -8,10 +8,3 @@ test('renders Bestsellers component', () => {
     const bestsellersContainer = document.querySelector('.bestsellers');
     expect(bestsellersContainer).toBeInTheDocument();
 });
-
-test('renders Bestsellers component', async () => {
-    render(<Bestsellers />);
-
-    
-});
-
